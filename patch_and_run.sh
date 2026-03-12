@@ -47,7 +47,7 @@ function patch() {
     #pkill Discord
 
     echo "Downloading Discord from $STABLE"
-    notify-send --urgency=critical "Updating Discord..."
+    notify-send "Updating Discord..."
     curl -L -o "$TEMP_DIR/discord-stable.tar.gz" $STABLE --create-dirs
 
     echo "Updating Discord"
@@ -57,7 +57,7 @@ function patch() {
     bash $INSTALL_DIR/Discord/postinst.sh
 
     echo "Done!"
-    notify-send --urgency=critical "Discord updated successfully. Starting..."
+    notify-send "Discord updated successfully. Starting..."
 }
 
 patch
