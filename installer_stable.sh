@@ -5,6 +5,9 @@ INSTALL_DIR="$HOME/.local/bin"
 #INSTALL_DIR="/opt"
 #INSTALL_DIR="/usr/local/bin"
 
+# Start menu directory
+MENU_DIR="$HOME/.local/share/applications/"
+
 # Temporary working directory
 TEMP_DIR="/tmp/Discord"
 
@@ -16,6 +19,7 @@ STABLE=$DOWNLOAD_URL"?platform=linux&format=tar.gz"
 
 
 echo "Downloading Discord"
+mkdir -p "$INSTALL_DIR"
 curl -L -o "$TEMP_DIR/discord-stable.tar.gz" $STABLE --create-dirs
 
 echo "Installing Discord to $INSTALL_DIR"
@@ -34,7 +38,8 @@ perl -i -pe 's/(?<=(Path=)).*/$ENV{INSTALL_DIR}\/Discord/gmi' $INSTALL_DIR/Disco
 
 # Update the desktop shortcut
 echo Updating the desktop shortcuts
-mv $INSTALL_DIR/Discord/discord.desktop $HOME/.local/share/applications/
+mkdir -p "$MENU_DIR"
+mv $INSTALL_DIR/Discord/discord.desktop "$MENU_DIR"
 mv $INSTALL_DIR/Discord/discord.desktop.bkp $INSTALL_DIR/Discord/discord.desktop
 cat $INSTALL_DIR/Discord/discord.desktop
 xdg-desktop-menu forceupdate
